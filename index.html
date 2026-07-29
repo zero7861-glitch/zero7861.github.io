@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jungwon An | Personal Website</title>
+  <title>Jungwon Ahn | Personal Website</title>
 
   <style>
     * {
@@ -46,6 +46,20 @@
       font-size: 36px;
       margin-bottom: 10px;
       color: #111;
+    }
+
+    .home-title {
+      border: none;
+      background: transparent;
+      color: #111;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .home-title:hover {
+      color: #1f5fbf;
     }
 
     .subtitle {
@@ -140,6 +154,22 @@
     .tab-content p {
       margin-bottom: 12px;
       color: #333;
+    }
+
+    .profile-section {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .profile-photo {
+      width: 180px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      background: #eee;
     }
 
     ul {
@@ -256,6 +286,16 @@
         text-align: center;
       }
 
+      .profile-section {
+        display: block;
+      }
+
+      .profile-photo {
+        width: 160px;
+        height: 200px;
+        margin-bottom: 18px;
+      }
+
       h1 {
         font-size: 30px;
       }
@@ -268,7 +308,9 @@
     <section id="profileCard" class="profile-card">
       <div class="site-layout">
         <aside class="sidebar">
-          <h1>Jungwon Ahn</h1>
+          <h1>
+            <button class="home-title" onclick="goHome()" title="Back to Home">Jungwon Ahn</button>
+          </h1>
 
           <p class="subtitle">
             Graduate Researcher | Prospective Ph.D. Applicant<br>
@@ -276,18 +318,19 @@
           </p>
 
           <p class="intro">
-            I am a undergraduate researcher interested in electrochemical energy systems, with a focus on catalysts,
+            I am a graduate researcher interested in electrochemical energy systems, with a focus on catalysts,
             electrodes, polymer electrolyte membranes, and interfacial engineering for high-performance and durable
             fuel cells and water electrolysis systems.
           </p>
 
           <p class="contact">
-            Email: <a href="mailto:your.email@example.com">zero7861@kookmin.ac.kr</a><br>
+            Email: <a href="mailto:your.email@example.com">your.email@example.com</a><br>
             Google Scholar: <a href="#">Link</a><br>
             GitHub: <a href="#">Link</a>
           </p>
 
           <nav class="tab-buttons" aria-label="Main sections">
+            <button class="tab-button" onclick="openTab(event, 'profile')">Profile</button>
             <button class="tab-button" onclick="openTab(event, 'research')">Research</button>
             <button class="tab-button" onclick="openTab(event, 'publications')">Publications</button>
             <button class="tab-button" onclick="openTab(event, 'projects')">Projects</button>
@@ -296,6 +339,34 @@
         </aside>
 
         <section class="content-panel" aria-live="polite">
+          <div id="profile" class="tab-content">
+            <h2>Profile</h2>
+            <div class="profile-section">
+              <img class="profile-photo" src="profile.jpg" alt="Profile photo of Jungwon Ahn">
+              <div>
+                <p>
+                  I am a graduate researcher working on electrochemical energy systems, including fuel cells and water
+                  electrolysis. My research interests include polymer electrolyte membranes, catalysts, electrodes, and
+                  interfacial engineering for high-performance and durable energy devices.
+                </p>
+
+                <h3>Education</h3>
+                <ul>
+                  <li>M.S. in Mechanical Engineering, Kookmin University</li>
+                  <li>B.S. in Nanoelectronic Physics and Mechanical Systems Engineering, Kookmin University</li>
+                </ul>
+
+                <h3>Research Interests</h3>
+                <ul>
+                  <li>Fuel cells and water electrolysis</li>
+                  <li>Polymer electrolyte membranes</li>
+                  <li>Electrode and membrane-electrode interfacial engineering</li>
+                  <li>iCVD-based surface modification</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
           <div id="research" class="tab-content">
             <h2>Research</h2>
             <p>
@@ -367,6 +438,19 @@
       // Show the selected tab content on the right.
       document.getElementById(tabName).classList.add('active');
       event.currentTarget.classList.add('active');
+    }
+
+    function goHome() {
+      const profileCard = document.getElementById('profileCard');
+      const contents = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tab-button');
+
+      // Return to the centered home layout.
+      profileCard.classList.remove('sidebar-mode');
+
+      // Hide all tab contents and remove active button colors.
+      contents.forEach(content => content.classList.remove('active'));
+      buttons.forEach(button => button.classList.remove('active'));
     }
   </script>
 </body>
