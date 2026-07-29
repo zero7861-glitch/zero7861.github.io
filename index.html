@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jungwon An | Personal Website</title>
+  <title>Jungwon Ahn | Personal Website</title>
+
   <style>
     * {
       box-sizing: border-box;
@@ -19,17 +20,26 @@
     }
 
     .container {
-      max-width: 920px;
-      margin: 60px auto;
-      padding: 0 20px;
+      max-width: 1100px;
+      margin: 55px auto;
+      padding: 0 22px;
     }
 
     .profile-card {
       background: #ffffff;
       border-radius: 18px;
-      padding: 45px 38px;
-      text-align: center;
+      padding: 45px 42px;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .site-layout {
+      display: block;
+    }
+
+    .sidebar {
+      text-align: center;
+      transition: all 0.3s ease;
     }
 
     h1 {
@@ -46,7 +56,7 @@
 
     .intro {
       max-width: 720px;
-      margin: 0 auto 28px auto;
+      margin: 0 auto 26px auto;
       font-size: 16px;
       color: #333;
     }
@@ -54,7 +64,7 @@
     .contact {
       font-size: 15px;
       color: #555;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
 
     .contact a {
@@ -62,13 +72,16 @@
       text-decoration: none;
     }
 
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
     .tab-buttons {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 22px;
-      margin-bottom: 30px;
+      margin-top: 20px;
     }
 
     .tab-button {
@@ -93,14 +106,18 @@
       border-color: #1f5fbf;
     }
 
-    .tab-content {
+    .content-panel {
       display: none;
-      text-align: left;
       background: #fafafa;
       border: 1px solid #e5e7eb;
       border-radius: 14px;
-      padding: 26px;
-      margin-top: 8px;
+      padding: 28px;
+      text-align: left;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .tab-content {
+      display: none;
     }
 
     .tab-content.active {
@@ -108,7 +125,7 @@
     }
 
     .tab-content h2 {
-      font-size: 23px;
+      font-size: 24px;
       margin-bottom: 14px;
       color: #111;
     }
@@ -152,7 +169,67 @@
       font-size: 13px;
     }
 
-    @media (max-width: 600px) {
+    /* This class is added after clicking a tab button. */
+    .profile-card.sidebar-mode .site-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .profile-card.sidebar-mode .sidebar {
+      text-align: left;
+      padding-right: 24px;
+      border-right: 1px solid #e5e7eb;
+    }
+
+    .profile-card.sidebar-mode h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .profile-card.sidebar-mode .subtitle {
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .profile-card.sidebar-mode .intro {
+      display: none;
+    }
+
+    .profile-card.sidebar-mode .contact {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .profile-card.sidebar-mode .tab-buttons {
+      flex-direction: column;
+      align-items: stretch;
+      margin-top: 18px;
+    }
+
+    .profile-card.sidebar-mode .tab-button {
+      width: 100%;
+      text-align: left;
+      border-radius: 10px;
+    }
+
+    .profile-card.sidebar-mode .content-panel {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 760px) {
       .container {
         margin: 30px auto;
       }
@@ -161,87 +238,113 @@
         padding: 34px 22px;
       }
 
-      h1 {
-        font-size: 30px;
+      .profile-card.sidebar-mode .site-layout {
+        display: block;
       }
 
-      .tab-button {
-        width: 100%;
+      .profile-card.sidebar-mode .sidebar {
+        border-right: none;
+        padding-right: 0;
+        margin-bottom: 24px;
+      }
+
+      .profile-card.sidebar-mode .tab-buttons {
+        flex-direction: row;
+      }
+
+      .profile-card.sidebar-mode .tab-button {
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 30px;
       }
     }
   </style>
 </head>
+
 <body>
   <main class="container">
-    <section class="profile-card">
-      <h1>Jungwon An</h1>
-      <p class="subtitle">Undergraduate Researcher and Prospective Ph.D. Applicant<br>
-        Fuel Cells, Water Electrolysis, and Polymer Electrolyte Membranes</p>
+    <section id="profileCard" class="profile-card">
+      <div class="site-layout">
+        <aside class="sidebar">
+          <h1>Jungwon Ahn</h1>
 
-      <p class="intro">
-        I am a graduate researcher interested in electrochemical energy systems, with a focus on catalysts,
-        electrodes, polymer electrolyte membranes, and interfacial engineering for high-performance and durable
-        fuel cells and water electrolysis systems.
-      </p>
+          <p class="subtitle">
+            Graduate Researcher | Prospective Ph.D. Applicant<br>
+            Fuel Cells, Water Electrolysis, and Polymer Electrolyte Membranes
+          </p>
 
-      <p class="contact">
-        Email: <a href="mailto:your.email@example.com">zero7861@gmail.com</a> &nbsp;|&nbsp;
-        Google Scholar: <a href="#">Link</a> &nbsp;|&nbsp;
-        GitHub: <a href="#">Link</a>
-      </p>
+          <p class="intro">
+            I am a graduate researcher interested in electrochemical energy systems, with a focus on catalysts,
+            electrodes, polymer electrolyte membranes, and interfacial engineering for high-performance and durable
+            fuel cells and water electrolysis systems.
+          </p>
 
-      <div class="tab-buttons">
-        <button class="tab-button active" onclick="openTab(event, 'research')">Research</button>
-        <button class="tab-button" onclick="openTab(event, 'publications')">Publications</button>
-        <button class="tab-button" onclick="openTab(event, 'projects')">Projects</button>
-        <button class="tab-button" onclick="openTab(event, 'cv')">CV</button>
-      </div>
+          <p class="contact">
+            Email: <a href="mailto:your.email@example.com">your.email@example.com</a><br>
+            Google Scholar: <a href="#">Link</a><br>
+            GitHub: <a href="#">Link</a>
+          </p>
 
-      <div id="research" class="tab-content active">
-        <h2>Research</h2>
-        <p>
-          My research focuses on materials and interfacial design for fuel cells and water electrolysis systems.
-          I investigate degradation mechanisms and develop strategies to enhance electrochemical performance,
-          durability, and transport properties.
-        </p>
-        <ul>
-          <li>Polymer electrolyte membranes and reinforced composite membranes</li>
-          <li>Catalyst layers, electrodes, and membrane-electrode interfaces</li>
-          <li>iCVD-based surface modification of porous supports and functional interfaces</li>
-          <li>Electrochemical analysis of PEMFCs, AEMWEs, and related energy devices</li>
-        </ul>
-      </div>
+          <nav class="tab-buttons" aria-label="Main sections">
+            <button class="tab-button" onclick="openTab(event, 'research')">Research</button>
+            <button class="tab-button" onclick="openTab(event, 'publications')">Publications</button>
+            <button class="tab-button" onclick="openTab(event, 'projects')">Projects</button>
+            <button class="tab-button" onclick="openTab(event, 'cv')">CV</button>
+          </nav>
+        </aside>
 
-      <div id="publications" class="tab-content">
-        <h2>Publications</h2>
-        <p>Selected publications will be updated here.</p>
-        <ul>
-          <li><strong>Author Name</strong>, Co-authors. “Paper Title.” <em>Journal Name</em>, Year.</li>
-          <li><strong>Author Name</strong>, Co-authors. “Paper Title.” <em>Journal Name</em>, Year.</li>
-        </ul>
-      </div>
+        <section class="content-panel" aria-live="polite">
+          <div id="research" class="tab-content">
+            <h2>Research</h2>
+            <p>
+              My research focuses on materials and interfacial design for fuel cells and water electrolysis systems.
+              I investigate degradation mechanisms and develop strategies to enhance electrochemical performance,
+              durability, and transport properties.
+            </p>
+            <ul>
+              <li>Polymer electrolyte membranes and reinforced composite membranes</li>
+              <li>Catalyst layers, electrodes, and membrane-electrode interfaces</li>
+              <li>iCVD-based surface modification of porous supports and functional interfaces</li>
+              <li>Electrochemical analysis of PEMFCs, AEMWEs, and related energy devices</li>
+            </ul>
+          </div>
 
-      <div id="projects" class="tab-content">
-        <h2>Projects</h2>
-        <h3>iCVD-Based Surface Engineering for Composite Electrolyte Membranes</h3>
-        <p>
-          Developed vapor-phase modification strategies for porous supports and evaluated their effects on ionomer
-          impregnation, membrane properties, and electrochemical device performance.
-        </p>
+          <div id="publications" class="tab-content">
+            <h2>Publications</h2>
+            <p>Selected publications will be updated here.</p>
+            <ul>
+              <li><strong>Jungwon Ahn</strong>, Co-authors. “Paper Title.” <em>Journal Name</em>, Year.</li>
+              <li><strong>Jungwon Ahn</strong>, Co-authors. “Paper Title.” <em>Journal Name</em>, Year.</li>
+            </ul>
+          </div>
 
-        <h3>Fuel Cell Catalyst and MEA Evaluation</h3>
-        <p>
-          Fabricated and evaluated catalyst-coated MEAs using electrochemical techniques including polarization curves,
-          EIS, CV, and durability protocols.
-        </p>
-      </div>
+          <div id="projects" class="tab-content">
+            <h2>Projects</h2>
 
-      <div id="cv" class="tab-content">
-        <h2>CV</h2>
-        <p>
-          My full CV is available upon request. You can also upload a PDF file to this GitHub repository and link it here.
-        </p>
-        <a class="cv-button" href="cv.pdf" target="_blank">Download CV</a>
+            <h3>iCVD-Based Surface Engineering for Composite Electrolyte Membranes</h3>
+            <p>
+              Developed vapor-phase modification strategies for porous supports and evaluated their effects on ionomer
+              impregnation, membrane properties, and electrochemical device performance.
+            </p>
+
+            <h3>Fuel Cell Catalyst and MEA Evaluation</h3>
+            <p>
+              Fabricated and evaluated catalyst-coated MEAs using electrochemical techniques including polarization curves,
+              EIS, CV, and durability protocols.
+            </p>
+          </div>
+
+          <div id="cv" class="tab-content">
+            <h2>CV</h2>
+            <p>
+              My full CV is available upon request. You can upload a PDF file named <strong>cv.pdf</strong> to this GitHub
+              repository and link it here.
+            </p>
+            <a class="cv-button" href="cv.pdf" target="_blank">Download CV</a>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -250,12 +353,18 @@
 
   <script>
     function openTab(event, tabName) {
+      const profileCard = document.getElementById('profileCard');
       const contents = document.querySelectorAll('.tab-content');
       const buttons = document.querySelectorAll('.tab-button');
 
+      // Move the profile/menu area to the left.
+      profileCard.classList.add('sidebar-mode');
+
+      // Remove existing active states.
       contents.forEach(content => content.classList.remove('active'));
       buttons.forEach(button => button.classList.remove('active'));
 
+      // Show the selected tab content on the right.
       document.getElementById(tabName).classList.add('active');
       event.currentTarget.classList.add('active');
     }
