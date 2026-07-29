@@ -26,7 +26,7 @@
       transition: max-width 0.25s ease;
     }
 
-    /* Wider layout only for the Publications tab. */
+    /* Wider layout only for the Publications and Conferences tab. */
     .container.publication-wide {
       max-width: 1380px;
     }
@@ -387,7 +387,7 @@
           <nav class="tab-buttons" aria-label="Main sections">
             <button class="tab-button" onclick="openTab(event, 'profile')">Profile</button>
             <button class="tab-button" onclick="openTab(event, 'research')">Research</button>
-            <button class="tab-button" onclick="openTab(event, 'publications')">Publications</button>
+            <button class="tab-button" onclick="openTab(event, 'publications')">Publications and Conferences</button>
             <button class="tab-button" onclick="openTab(event, 'projects')">Projects</button>
             <button class="tab-button" onclick="openTab(event, 'cv')">CV</button>
           </nav>
@@ -438,7 +438,7 @@
           </div>
 
           <div id="publications" class="tab-content">
-            <h2>Publications</h2>
+            <h2>Publications and Conferences</h2>
 
             <div class="publication-category">
               <h3>First Author</h3>
@@ -517,10 +517,9 @@
           <div id="cv" class="tab-content">
             <h2>CV</h2>
             <p>
-              My full CV is available upon request. You can upload a PDF file named <strong>Curriculum Vitae_Jungwon An</strong> to this GitHub
-              repository and link it here.
+              My full CV can be downloaded below.
             </p>
-            <a class="cv-button" href="Curriculum Vitae_Jungwon An.pdf" target="_blank">Download CV</a>
+            <a class="cv-button" href="Curriculum%20Vitae_Jungwon%20An.docx" download>Download CV</a>
           </div>
         </section>
       </div>
@@ -539,7 +538,7 @@
       // Move the profile/menu area to the left.
       profileCard.classList.add('sidebar-mode');
 
-      // Make only the Publications tab wider.
+      // Make only the Publications and Conferences tab wider.
       if (tabName === 'publications') {
         mainContainer.classList.add('publication-wide');
       } else {
