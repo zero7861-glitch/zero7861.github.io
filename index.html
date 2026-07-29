@@ -23,6 +23,20 @@
       max-width: 1100px;
       margin: 55px auto;
       padding: 0 22px;
+      transition: max-width 0.25s ease;
+    }
+
+    /* Wider layout only for the Publications tab. */
+    .container.publication-wide {
+      max-width: 1380px;
+    }
+
+    .container.publication-wide .content-panel {
+      padding: 34px 38px;
+    }
+
+    .container.publication-wide #publications {
+      max-width: 940px;
     }
 
     .profile-card {
@@ -181,6 +195,47 @@
       margin-bottom: 8px;
     }
 
+    .publication-category {
+      margin-top: 22px;
+    }
+
+    .publication-category h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #111;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 6px;
+    }
+
+    .publication-list {
+      list-style: none;
+      counter-reset: publication-counter;
+      margin-left: 0;
+      padding-left: 0;
+    }
+
+    .publication-list li {
+      counter-increment: publication-counter;
+      position: relative;
+      padding-left: 42px;
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+
+    .publication-list li::before {
+      content: "[" counter(publication-counter) "]";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .pub-note {
+      color: #555;
+      font-size: 14px;
+    }
+
     .cv-button {
       display: inline-block;
       margin-top: 10px;
@@ -304,7 +359,7 @@
 </head>
 
 <body>
-  <main class="container">
+  <main id="mainContainer" class="container">
     <section id="profileCard" class="profile-card">
       <div class="site-layout">
         <aside class="sidebar">
@@ -384,12 +439,32 @@
 
           <div id="publications" class="tab-content">
             <h2>Publications</h2>
-            <p>Selected publications will be updated here.</p>
-            <ul>
-              <li>Sohee Kim†, Hyunwoo Son†,<strong>Jungwon An</strong>, Segeun Jang* and Si-Hyung Lim *, Co-authors. “Butter-Infused Slippery Microholes Coupled with Photothermal Carbon for Efficient Anti-Icing and Deicing”
-                <br><em>International Journal of Precision Engineering and Manufacturing-Green Technology</em>, 2026, Accepted</li>
-              <li><strong>Jungwon Ahn</strong>, Co-authors. “Paper Title.” <em>Journal Name</em>, Year.</li>
-            </ul>
+
+            <div class="publication-category">
+              <h3>First Author</h3>
+              <ol class="publication-list">
+                <li>
+                  <strong>Jungwon Ahn</strong>, Co-authors. “Paper Title.”
+                  <em>Journal Name</em>, Year.
+                </li>
+                <li>
+                  <strong>Jungwon Ahn</strong>, Co-authors. “Paper Title.”
+                  <em>Journal Name</em>, Year.
+                </li>
+              </ol>
+            </div>
+
+            <div class="publication-category">
+              <h3>Co-Author</h3>
+              <ol class="publication-list">
+                <li>
+                  Sohee Kim†, Hyunwoo Son†, <strong>Jungwon Ahn</strong>, Segeun Jang* and Si-Hyung Lim*.
+                  “Butter-Infused Slippery Microholes Coupled with Photothermal Carbon for Efficient Anti-Icing and Deicing.”
+                  <em>International Journal of Precision Engineering and Manufacturing-Green Technology</em>, 2026, Accepted.
+                </li>
+              </ol>
+              <p class="pub-note">† Equal contribution; * Corresponding author.</p>
+            </div>
           </div>
 
           <div id="projects" class="tab-content">
@@ -425,12 +500,20 @@
 
   <script>
     function openTab(event, tabName) {
+      const mainContainer = document.getElementById('mainContainer');
       const profileCard = document.getElementById('profileCard');
       const contents = document.querySelectorAll('.tab-content');
       const buttons = document.querySelectorAll('.tab-button');
 
       // Move the profile/menu area to the left.
       profileCard.classList.add('sidebar-mode');
+
+      // Make only the Publications tab wider.
+      if (tabName === 'publications') {
+        mainContainer.classList.add('publication-wide');
+      } else {
+        mainContainer.classList.remove('publication-wide');
+      }
 
       // Remove existing active states.
       contents.forEach(content => content.classList.remove('active'));
@@ -442,12 +525,14 @@
     }
 
     function goHome() {
+      const mainContainer = document.getElementById('mainContainer');
       const profileCard = document.getElementById('profileCard');
       const contents = document.querySelectorAll('.tab-content');
       const buttons = document.querySelectorAll('.tab-button');
 
       // Return to the centered home layout.
       profileCard.classList.remove('sidebar-mode');
+      mainContainer.classList.remove('publication-wide');
 
       // Hide all tab contents and remove active button colors.
       contents.forEach(content => content.classList.remove('active'));
