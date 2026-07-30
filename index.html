@@ -26,7 +26,15 @@
       transition: max-width 0.25s ease;
     }
 
-    /* Wider layout only for the Publications and Conferences tab. */
+    /* Wider layout for content-heavy tabs. */
+    .container.profile-wide {
+      max-width: 1280px;
+    }
+
+    .container.profile-wide .content-panel {
+      padding: 32px 34px;
+    }
+
     .container.publication-wide {
       max-width: 1380px;
     }
@@ -172,9 +180,17 @@
 
     .profile-section {
       display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 24px;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 30px;
       align-items: start;
+    }
+
+    .profile-section > div {
+      min-width: 0;
+    }
+
+    .profile-section > div > p {
+      line-height: 1.75;
     }
 
     .profile-photo {
@@ -543,11 +559,13 @@
       // Move the profile/menu area to the left.
       profileCard.classList.add('sidebar-mode');
 
-      // Make only the Publications and Conferences tab wider.
-      if (tabName === 'publications') {
+      // Adjust the page width depending on the selected tab.
+      mainContainer.classList.remove('profile-wide', 'publication-wide');
+
+      if (tabName === 'profile') {
+        mainContainer.classList.add('profile-wide');
+      } else if (tabName === 'publications') {
         mainContainer.classList.add('publication-wide');
-      } else {
-        mainContainer.classList.remove('publication-wide');
       }
 
       // Remove existing active states.
@@ -567,7 +585,7 @@
 
       // Return to the centered home layout.
       profileCard.classList.remove('sidebar-mode');
-      mainContainer.classList.remove('publication-wide');
+      mainContainer.classList.remove('profile-wide', 'publication-wide');
 
       // Hide all tab contents and remove active button colors.
       contents.forEach(content => content.classList.remove('active'));
