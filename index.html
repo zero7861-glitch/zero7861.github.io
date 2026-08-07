@@ -3,56 +3,119 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jungwon An | Personal Website</title>
+  <meta
+    name="description"
+    content="Academic portfolio of Jungwon An, a researcher working on fuel cells, water electrolysis, polymer electrolyte membranes, catalysts, and iCVD-based interfacial engineering."
+  />
+  <title>Jungwon An | Academic Portfolio</title>
 
   <style>
-    * {
+    :root {
+      --wine-950: #3f0d1d;
+      --wine-900: #531326;
+      --wine-800: #6b1d34;
+      --wine-700: #842744;
+      --wine-600: #9f3653;
+      --rose-100: #f7e8ed;
+      --rose-50: #fcf5f7;
+      --cream: #fbf8f4;
+      --paper: #ffffff;
+      --ink: #251a1d;
+      --body-text: #46373c;
+      --muted: #78666c;
+      --line: #eadde1;
+      --line-strong: #dcc6ce;
+      --shadow-lg: 0 24px 60px rgba(63, 13, 29, 0.12);
+      --shadow-sm: 0 10px 28px rgba(63, 13, 29, 0.07);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 13px;
+      --transition: 180ms ease;
+    }
+
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-      color: #222;
-      background: #f5f5f5;
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.68;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 8%, rgba(159, 54, 83, 0.09), transparent 32rem),
+        radial-gradient(circle at 92% 88%, rgba(107, 29, 52, 0.07), transparent 34rem),
+        var(--cream);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: var(--wine-700);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      color: var(--wine-900);
     }
 
     .container {
-      max-width: 1100px;
-      margin: 55px auto;
-      padding: 0 22px;
-      transition: max-width 0.25s ease;
+      width: min(100% - 40px, 1180px);
+      margin: 48px auto 28px;
+      transition: width 240ms ease, max-width 240ms ease;
     }
 
-    /* Wider layout for content-heavy tabs. */
-    .container.profile-wide {
-      max-width: 1280px;
+    /* Each category gets a width suited to its content density. */
+    .container.view-profile {
+      width: min(100% - 40px, 1320px);
     }
 
-    .container.profile-wide .content-panel {
-      padding: 32px 34px;
+    .container.view-research {
+      width: min(100% - 40px, 1380px);
     }
 
-    .container.publication-wide {
-      max-width: 1380px;
+    .container.view-publications {
+      width: min(100% - 32px, 1540px);
     }
 
-    .container.publication-wide .content-panel {
-      padding: 34px 38px;
+    .container.view-projects {
+      width: min(100% - 32px, 1500px);
     }
 
-    .container.publication-wide #publications {
-      max-width: 940px;
+    .container.view-cv {
+      width: min(100% - 40px, 1240px);
     }
 
     .profile-card {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 45px 42px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      padding: 54px;
+      border: 1px solid rgba(132, 39, 68, 0.16);
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: var(--shadow-lg);
+      transition: padding 240ms ease;
+    }
+
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 7px;
+      background: linear-gradient(90deg, var(--wine-950), var(--wine-600), var(--wine-800));
     }
 
     .site-layout {
@@ -61,55 +124,98 @@
 
     .sidebar {
       text-align: center;
-      transition: all 0.3s ease;
+      transition: all 240ms ease;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--wine-700);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      text-wrap: balance;
     }
 
     h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-      color: #111;
+      margin-bottom: 12px;
+      color: var(--wine-950);
+      font-size: clamp(38px, 5vw, 56px);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
     }
 
     .home-title {
-      border: none;
+      padding: 0;
+      border: 0;
+      color: inherit;
       background: transparent;
-      color: #111;
       font: inherit;
       font-weight: 700;
       cursor: pointer;
-      padding: 0;
+      transition: color var(--transition);
     }
 
-    .home-title:hover {
-      color: #1f5fbf;
+    .home-title:hover,
+    .home-title:focus-visible {
+      color: var(--wine-600);
+      outline: none;
     }
 
     .subtitle {
+      max-width: 760px;
+      margin: 0 auto 26px;
+      color: var(--muted);
       font-size: 17px;
-      color: #555;
-      margin-bottom: 22px;
+      line-height: 1.6;
+      text-wrap: balance;
     }
 
     .intro {
-      max-width: 720px;
-      margin: 0 auto 26px auto;
-      font-size: 16px;
-      color: #333;
+      max-width: 900px;
+      margin: 0 auto 30px;
+      color: var(--body-text);
+      font-size: 16.5px;
+      line-height: 1.82;
+      text-wrap: pretty;
     }
 
     .contact {
-      font-size: 15px;
-      color: #555;
-      margin-bottom: 28px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 7px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--rose-50);
+      white-space: nowrap;
+    }
+
+    .contact-label {
+      color: var(--wine-800);
+      font-weight: 700;
     }
 
     .contact a {
-      color: #1f5fbf;
       text-decoration: none;
-    }
-
-    .contact a:hover {
-      text-decoration: underline;
     }
 
     .tab-buttons {
@@ -117,71 +223,132 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 10px;
     }
 
     .tab-button {
-      border: 1px solid #d0d7de;
-      background: #fff;
-      color: #222;
+      min-height: 44px;
       padding: 10px 18px;
+      border: 1px solid var(--line-strong);
       border-radius: 999px;
+      color: var(--wine-900);
+      background: var(--paper);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
       cursor: pointer;
-      font-size: 15px;
-      transition: 0.2s ease;
+      transition:
+        transform var(--transition),
+        border-color var(--transition),
+        color var(--transition),
+        background var(--transition),
+        box-shadow var(--transition);
     }
 
     .tab-button:hover {
-      background: #f0f4ff;
-      border-color: #7aa2ff;
+      transform: translateY(-1px);
+      border-color: var(--wine-600);
+      background: var(--rose-50);
+      box-shadow: 0 8px 18px rgba(107, 29, 52, 0.08);
+    }
+
+    .tab-button:focus-visible {
+      outline: 3px solid rgba(159, 54, 83, 0.22);
+      outline-offset: 2px;
     }
 
     .tab-button.active {
-      background: #1f5fbf;
+      border-color: var(--wine-800);
       color: #fff;
-      border-color: #1f5fbf;
+      background: linear-gradient(135deg, var(--wine-900), var(--wine-700));
+      box-shadow: 0 10px 22px rgba(107, 29, 52, 0.20);
     }
 
     .content-panel {
       display: none;
-      background: #fafafa;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 28px;
+      min-width: 0;
+      padding: 34px 38px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, #fff, #fffdfd);
+      box-shadow: var(--shadow-sm);
       text-align: left;
-      animation: fadeIn 0.25s ease;
+      animation: fadeIn 220ms ease;
     }
 
     .tab-content {
       display: none;
+      min-width: 0;
     }
 
     .tab-content.active {
       display: block;
     }
 
-    .tab-content h2 {
-      font-size: 24px;
-      margin-bottom: 14px;
-      color: #111;
+    .section-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 26px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-heading h2,
+    .tab-content > h2 {
+      margin-bottom: 0;
+      color: var(--wine-950);
+      font-size: clamp(27px, 3vw, 35px);
+      line-height: 1.16;
+      letter-spacing: -0.02em;
+    }
+
+    .section-kicker {
+      margin: 0;
+      color: var(--wine-600);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
     }
 
     .tab-content h3 {
-      font-size: 17px;
-      margin-top: 18px;
-      margin-bottom: 6px;
-      color: #222;
+      margin: 0 0 9px;
+      color: var(--wine-900);
+      font-size: 19px;
+      line-height: 1.4;
     }
 
     .tab-content p {
-      margin-bottom: 12px;
-      color: #333;
+      max-width: 92ch;
+      margin: 0 0 14px;
+      color: var(--body-text);
+      overflow-wrap: break-word;
+      text-wrap: pretty;
+    }
+
+    .lead-copy {
+      max-width: 100ch !important;
+      margin-bottom: 24px !important;
+      font-size: 16.5px;
+      line-height: 1.82;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 21px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: var(--body-text);
     }
 
     .profile-section {
       display: grid;
-      grid-template-columns: 180px minmax(0, 1fr);
-      gap: 30px;
+      grid-template-columns: 210px minmax(0, 1fr);
+      gap: 36px;
       align-items: start;
     }
 
@@ -189,109 +356,346 @@
       min-width: 0;
     }
 
-    .profile-section > div > p {
-      line-height: 1.75;
+    .profile-photo-wrap {
+      position: relative;
+      width: 196px;
+      margin: 0 auto;
+    }
+
+    .profile-photo-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 8px -8px -8px 8px;
+      z-index: 0;
+      border-radius: 50%;
+      background: var(--rose-100);
     }
 
     .profile-photo {
-      width: 180px;
-      height: 220px;
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 196px;
+      height: 196px;
       object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid #e5e7eb;
+      border: 5px solid #fff;
+      border-radius: 50%;
       background: #eee;
+      box-shadow: 0 15px 32px rgba(63, 13, 29, 0.17);
     }
 
-    ul {
-      margin-left: 20px;
-      margin-top: 8px;
+    .profile-copy {
+      max-width: 98ch !important;
+      font-size: 16px;
+      line-height: 1.82;
     }
 
-    li {
-      margin-bottom: 8px;
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .info-card {
+      min-width: 0;
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--rose-50);
+    }
+
+    .info-card ul {
+      margin-top: 4px;
+    }
+
+    .meta-line {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .research-card {
+      min-width: 0;
+      padding: 21px 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fff;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .research-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(132, 39, 68, 0.32);
+      box-shadow: 0 12px 26px rgba(63, 13, 29, 0.08);
+    }
+
+    .research-card h3 {
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .research-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.7;
     }
 
     .publication-category {
-      margin-top: 22px;
+      margin-top: 34px;
     }
 
-    .publication-category h3 {
-      font-size: 18px;
-      margin-bottom: 12px;
-      color: #111;
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 6px;
+    .publication-category:first-of-type {
+      margin-top: 0;
+    }
+
+    .publication-category > h3 {
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--rose-100);
+      font-size: 21px;
     }
 
     .publication-list {
+      display: grid;
+      gap: 13px;
+      margin: 0;
+      padding: 0;
       list-style: none;
       counter-reset: publication-counter;
-      margin-left: 0;
-      padding-left: 0;
     }
 
     .publication-list li {
       counter-increment: publication-counter;
       position: relative;
-      padding-left: 42px;
-      margin-bottom: 16px;
-      line-height: 1.55;
+      min-width: 0;
+      margin: 0;
+      padding: 20px 22px 20px 64px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fff;
+      line-height: 1.62;
+      overflow-wrap: break-word;
+      word-break: normal;
+      text-wrap: pretty;
     }
 
     .publication-list li::before {
-      content: "[" counter(publication-counter) "]";
+      content: counter(publication-counter, decimal-leading-zero);
       position: absolute;
-      left: 0;
-      top: 0;
+      top: 20px;
+      left: 20px;
+      color: var(--wine-700);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
       font-weight: 700;
-      color: #111;
+    }
+
+    .pub-status {
+      display: inline-flex;
+      align-items: center;
+      margin: 0 8px 5px 0;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: var(--wine-800);
+      background: var(--rose-100);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+    .pub-authors,
+    .pub-title,
+    .pub-journal {
+      display: block;
+    }
+
+    .pub-authors {
+      color: var(--body-text);
+    }
+
+    .pub-title {
+      margin: 5px 0;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .pub-journal {
+      color: var(--muted);
+    }
+
+    .publication-list a {
+      overflow-wrap: anywhere;
+      font-size: 0.95em;
     }
 
     .pub-note {
-      color: #555;
-      font-size: 14px;
+      margin-top: 18px !important;
+      color: var(--muted) !important;
+      font-size: 13.5px;
     }
 
-    .cv-button {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 18px;
-      background: #1f5fbf;
-      color: #fff;
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 15px;
+    .project-section + .project-section {
+      margin-top: 40px;
     }
 
-    .footer {
-      text-align: center;
-      margin-top: 24px;
-      color: #777;
+    .project-section-title {
+      margin: 0 0 16px !important;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--rose-100);
+      color: var(--wine-950) !important;
+      font-size: 23px !important;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .project-card {
+      min-width: 0;
+      padding: 22px 23px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(63, 13, 29, 0.035);
+    }
+
+    .project-card h3 {
+      margin-bottom: 8px;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.48;
+      text-wrap: pretty;
+    }
+
+    .project-meta {
+      display: block;
+      margin: 0 0 12px;
+      color: var(--wine-600);
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.55;
+    }
+
+    .project-role {
+      position: relative;
+      margin: 0 !important;
+      padding-left: 17px;
+      color: var(--body-text) !important;
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+
+    .project-role::before {
+      content: "";
+      position: absolute;
+      top: 0.76em;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--wine-600);
+    }
+
+    .project-note {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
       font-size: 13px;
     }
 
-    /* This class is added after clicking a tab button. */
+    .cv-panel {
+      max-width: 720px;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--rose-50), #fff);
+    }
+
+    .cv-panel p {
+      margin-bottom: 18px;
+    }
+
+    .cv-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 11px 19px;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--wine-900), var(--wine-700));
+      box-shadow: 0 10px 22px rgba(107, 29, 52, 0.20);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .cv-button:hover {
+      transform: translateY(-1px);
+      color: #fff;
+      box-shadow: 0 13px 28px rgba(107, 29, 52, 0.27);
+    }
+
+    .footer {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      text-align: center;
+    }
+
+    /* Sidebar layout after a category is selected. */
+    .profile-card.sidebar-mode {
+      padding: 42px;
+    }
+
     .profile-card.sidebar-mode .site-layout {
       display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 32px;
+      grid-template-columns: minmax(250px, 292px) minmax(0, 1fr);
+      gap: 34px;
       align-items: start;
     }
 
     .profile-card.sidebar-mode .sidebar {
+      position: sticky;
+      top: 26px;
+      min-width: 0;
+      padding-right: 30px;
+      border-right: 1px solid var(--line);
       text-align: left;
-      padding-right: 24px;
-      border-right: 1px solid #e5e7eb;
+    }
+
+    .profile-card.sidebar-mode .eyebrow {
+      margin-bottom: 5px;
     }
 
     .profile-card.sidebar-mode h1 {
-      font-size: 30px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      font-size: 35px;
+      letter-spacing: -0.03em;
     }
 
     .profile-card.sidebar-mode .subtitle {
-      font-size: 15px;
-      margin-bottom: 18px;
+      margin: 0 0 18px;
+      font-size: 14px;
+      line-height: 1.58;
+      text-wrap: pretty;
     }
 
     .profile-card.sidebar-mode .intro {
@@ -299,20 +703,33 @@
     }
 
     .profile-card.sidebar-mode .contact {
-      font-size: 14px;
-      margin-bottom: 20px;
+      display: grid;
+      justify-content: stretch;
+      gap: 7px;
+      margin: 0 0 21px;
+    }
+
+    .profile-card.sidebar-mode .contact-item {
+      width: 100%;
+      min-width: 0;
+      padding: 7px 10px;
+      border-radius: 10px;
+      white-space: normal;
+      overflow-wrap: anywhere;
     }
 
     .profile-card.sidebar-mode .tab-buttons {
       flex-direction: column;
       align-items: stretch;
-      margin-top: 18px;
+      gap: 7px;
+      margin-top: 0;
     }
 
     .profile-card.sidebar-mode .tab-button {
       width: 100%;
-      text-align: left;
+      min-height: 42px;
       border-radius: 10px;
+      text-align: left;
     }
 
     .profile-card.sidebar-mode .content-panel {
@@ -322,7 +739,7 @@
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(6px);
+        transform: translateY(7px);
       }
       to {
         opacity: 1;
@@ -330,13 +747,54 @@
       }
     }
 
-    @media (max-width: 760px) {
-      .container {
-        margin: 30px auto;
+    @media (max-width: 1060px) {
+      .container,
+      .container.view-profile,
+      .container.view-research,
+      .container.view-publications,
+      .container.view-projects,
+      .container.view-cv {
+        width: min(100% - 28px, 980px);
       }
 
-      .profile-card {
-        padding: 34px 22px;
+      .profile-card,
+      .profile-card.sidebar-mode {
+        padding: 36px;
+      }
+
+      .profile-card.sidebar-mode .site-layout {
+        grid-template-columns: 240px minmax(0, 1fr);
+        gap: 26px;
+      }
+
+      .profile-card.sidebar-mode .sidebar {
+        padding-right: 22px;
+      }
+
+      .content-panel {
+        padding: 30px;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .container,
+      .container.view-profile,
+      .container.view-research,
+      .container.view-publications,
+      .container.view-projects,
+      .container.view-cv {
+        width: min(100% - 20px, 720px);
+        margin-top: 18px;
+      }
+
+      .profile-card,
+      .profile-card.sidebar-mode {
+        padding: 30px 20px;
+        border-radius: 18px;
       }
 
       .profile-card.sidebar-mode .site-layout {
@@ -344,31 +802,135 @@
       }
 
       .profile-card.sidebar-mode .sidebar {
-        border-right: none;
-        padding-right: 0;
-        margin-bottom: 24px;
+        position: static;
+        padding: 0 0 24px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .profile-card.sidebar-mode .contact {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .profile-card.sidebar-mode .contact-item {
+        width: auto;
       }
 
       .profile-card.sidebar-mode .tab-buttons {
         flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 7px;
+        padding-bottom: 7px;
+        overflow-x: auto;
+        scrollbar-width: thin;
       }
 
       .profile-card.sidebar-mode .tab-button {
+        width: auto;
+        flex: 0 0 auto;
         text-align: center;
       }
 
+      .content-panel {
+        margin-top: 24px;
+        padding: 26px 20px;
+      }
+
       .profile-section {
-        display: block;
+        grid-template-columns: 1fr;
+        gap: 28px;
       }
 
-      .profile-photo {
-        width: 160px;
-        height: 200px;
-        margin-bottom: 18px;
+      .info-grid,
+      .research-grid {
+        grid-template-columns: 1fr;
       }
 
+      .publication-list li {
+        padding: 18px 17px 18px 50px;
+      }
+
+      .publication-list li::before {
+        top: 18px;
+        left: 16px;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .contact {
+        gap: 7px;
+      }
+    }
+
+    @media (max-width: 480px) {
       h1 {
-        font-size: 30px;
+        font-size: 38px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
+
+      .intro {
+        font-size: 15px;
+      }
+
+      .contact-item {
+        width: 100%;
+        justify-content: center;
+        white-space: normal;
+      }
+
+      .profile-card.sidebar-mode .contact-item {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .tab-buttons:not(.profile-card.sidebar-mode .tab-buttons) {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .tab-button {
+        width: 100%;
+      }
+
+      .profile-photo-wrap,
+      .profile-photo {
+        width: 174px;
+        height: 174px;
+      }
+
+      .publication-list li {
+        padding: 48px 16px 17px;
+      }
+
+      .publication-list li::before {
+        top: 15px;
+        left: 16px;
+      }
+
+      .project-card,
+      .info-card,
+      .research-card,
+      .cv-panel {
+        padding: 19px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -379,251 +941,316 @@
     <section id="profileCard" class="profile-card">
       <div class="site-layout">
         <aside class="sidebar">
+          <p class="eyebrow">Academic Portfolio</p>
           <h1>
-            <button class="home-title" onclick="goHome()" title="Back to Home">Jungwon An</button>
+            <button class="home-title" type="button" onclick="goHome()" title="Back to Home">
+              Jungwon An
+            </button>
           </h1>
 
           <p class="subtitle">
-            Graduate Researcher | Prospective Ph.D. Applicant<br>
+            Graduate Researcher | Prospective Ph.D. Applicant<br />
             Fuel Cells, Water Electrolysis, and Polymer Electrolyte Membranes
           </p>
 
           <p class="intro">
-          My research focuses on catalysts, electrodes, and polymer electrolyte membranes for fuel cell and water electrolysis systems.
-          <br>I investigate their degradation mechanisms and develop materials and interfacial design strategies to enhance electrochemical performance and durability.
-          <br>In particular, I use initiated chemical vapor deposition (iCVD) to engineer vapor-phase polymer coatings on porous substrates and functional interfaces, extending this approach toward high-performance and durable electrochemical energy systems.
+            My research focuses on catalysts, electrodes, and polymer electrolyte membranes for fuel cell and water electrolysis systems. I investigate their degradation mechanisms and develop materials and interfacial design strategies to enhance electrochemical performance and durability. In particular, I use initiated chemical vapor deposition (iCVD) to engineer vapor-phase polymer coatings on porous substrates and functional interfaces, extending this approach toward high-performance and durable electrochemical energy systems.
           </p>
 
-          <p class="contact">
-            Email: <a href="mailto:zero7861@kookmin.ac.kr">zero7861@kookmin.ac.kr</a><br>
-            Google Scholar: <a href="#">Link</a><br>
-            GitHub: <a href="#">Link</a>
-          </p>
+          <div class="contact" aria-label="Contact links">
+            <span class="contact-item">
+              <span class="contact-label">Email</span>
+              <a href="mailto:zero7861@kookmin.ac.kr">zero7861@kookmin.ac.kr</a>
+            </span>
+            <span class="contact-item">
+              <span class="contact-label">Google Scholar</span>
+              <a href="#">Link</a>
+            </span>
+            <span class="contact-item">
+              <span class="contact-label">GitHub</span>
+              <a href="#">Link</a>
+            </span>
+          </div>
 
-          <nav class="tab-buttons" aria-label="Main sections">
-            <button class="tab-button" onclick="openTab(event, 'profile')">Profile</button>
-            <button class="tab-button" onclick="openTab(event, 'research')">Research</button>
-            <button class="tab-button" onclick="openTab(event, 'publications')">Publications and Conferences</button>
-            <button class="tab-button" onclick="openTab(event, 'projects')">Projects</button>
-            <button class="tab-button" onclick="openTab(event, 'cv')">CV</button>
+          <nav class="tab-buttons" aria-label="Main sections" role="tablist">
+            <button class="tab-button" type="button" role="tab" aria-controls="profile" aria-selected="false" onclick="openTab(event, 'profile')">Profile</button>
+            <button class="tab-button" type="button" role="tab" aria-controls="research" aria-selected="false" onclick="openTab(event, 'research')">Research</button>
+            <button class="tab-button" type="button" role="tab" aria-controls="publications" aria-selected="false" onclick="openTab(event, 'publications')">Publications &amp; Conferences</button>
+            <button class="tab-button" type="button" role="tab" aria-controls="projects" aria-selected="false" onclick="openTab(event, 'projects')">Projects</button>
+            <button class="tab-button" type="button" role="tab" aria-controls="cv" aria-selected="false" onclick="openTab(event, 'cv')">CV</button>
           </nav>
         </aside>
 
         <section class="content-panel" aria-live="polite">
-          <div id="profile" class="tab-content">
-            <h2>Profile</h2>
+          <div id="profile" class="tab-content" role="tabpanel">
+            <div class="section-heading">
+              <h2>Profile</h2>
+              <p class="section-kicker">Background &amp; Interests</p>
+            </div>
+
             <div class="profile-section">
-              <img class="profile-photo" src="profile.jpg" alt="Profile photo of Jungwon An">
+              <div class="profile-photo-wrap">
+                <img class="profile-photo" src="profile.jpg" alt="Profile photo of Jungwon An" />
+              </div>
+
               <div>
-                <p>
-                My research focuses on catalysts, electrodes, and polymer electrolyte membranes for fuel cell and water electrolysis systems.
-            <br>I investigate their degradation mechanisms and develop materials and interfacial design strategies to enhance electrochemical performance and durability.
-            <br>In particular, I use initiated chemical vapor deposition (iCVD) to engineer vapor-phase polymer coatings on porous substrates and functional interfaces, extending this approach toward high-performance and durable electrochemical energy systems.
+                <p class="profile-copy">
+                  My research focuses on catalysts, electrodes, and polymer electrolyte membranes for fuel cell and water electrolysis systems. I investigate their degradation mechanisms and develop materials and interfacial design strategies to enhance electrochemical performance and durability. In particular, I use initiated chemical vapor deposition (iCVD) to engineer vapor-phase polymer coatings on porous substrates and functional interfaces, extending this approach toward high-performance and durable electrochemical energy systems.
                 </p>
 
-                <h3>Education</h3>
-                <ul>
-                  <li>B.S. Mechanical Engineering, Kookmin University <br>Expected Feb. 2027</br></li>
-                </ul>
+                <div class="info-grid">
+                  <section class="info-card">
+                    <h3>Education</h3>
+                    <ul>
+                      <li>
+                        B.S. Mechanical Engineering, Kookmin University
+                        <span class="meta-line">Expected February 2027</span>
+                      </li>
+                    </ul>
+                  </section>
 
-                <h3>Research Interests</h3>
-                <ul>
-                  <li>Fuel cells and water electrolysis</li>
-                  <li>Polymer electrolyte membranes</li>
-                  <li>initiated Chemical Vapor Deposition(iCVD)-based surface modification</li>
-                </ul>
+                  <section class="info-card">
+                    <h3>Research Interests</h3>
+                    <ul>
+                      <li>Fuel cells and water electrolysis</li>
+                      <li>Polymer electrolyte membranes</li>
+                      <li>Initiated chemical vapor deposition (iCVD)-based surface modification</li>
+                    </ul>
+                  </section>
+                </div>
               </div>
             </div>
           </div>
 
-          <div id="research" class="tab-content">
-            <h2>Research</h2>
-            <p>
-              My research focuses on catalysts, electrolyte membranes, and interfacial engineering for high-performance and durable fuel cell and water electrolysis systems.
-              <br>I investigate degradation mechanisms in electrochemical energy devices and develop materials-based strategies to improve their performance and durability.
-              <br>In particular, I use initiated chemical vapor deposition (iCVD) to study vapor-phase polymer deposition behavior and engineer functional surfaces and interfaces for electrochemical energy applications.
+          <div id="research" class="tab-content" role="tabpanel">
+            <div class="section-heading">
+              <h2>Research</h2>
+              <p class="section-kicker">Research Focus</p>
+            </div>
+
+            <p class="lead-copy">
+              My research focuses on catalysts, electrolyte membranes, and interfacial engineering for high-performance and durable fuel cell and water electrolysis systems. I investigate degradation mechanisms in electrochemical energy devices and develop materials-based strategies to improve their performance and durability. In particular, I use initiated chemical vapor deposition (iCVD) to study vapor-phase polymer deposition behavior and engineer functional surfaces and interfaces for electrochemical energy applications.
             </p>
-            <ul>
-              <li>Electrochemical analysis of PEMFCs, AEMWEs, and related energy devices</li>
-              <li>Polymer electrolyte membranes and reinforced composite membranes</li>
-              <li>Catalyst layers, electrodes, and membrane-electrode interfaces</li>
-              <li>iCVD-Based Surface Functionalization and Interfacial Engineering</li>
-            </ul>
+
+            <div class="research-grid">
+              <article class="research-card">
+                <h3>Electrochemical Analysis</h3>
+                <p>Electrochemical evaluation of PEMFCs, AEMWEs, and related energy-conversion devices.</p>
+              </article>
+
+              <article class="research-card">
+                <h3>Electrolyte Membranes</h3>
+                <p>Polymer electrolyte membranes and reinforced composite membrane architectures.</p>
+              </article>
+
+              <article class="research-card">
+                <h3>Catalysts &amp; Electrodes</h3>
+                <p>Catalyst layers, porous electrodes, and membrane–electrode interfacial design.</p>
+              </article>
+
+              <article class="research-card">
+                <h3>iCVD Surface Engineering</h3>
+                <p>iCVD-based surface functionalization, vapor-phase polymer coatings, and interfacial engineering.</p>
+              </article>
+            </div>
           </div>
 
-          <div id="publications" class="tab-content">
-            <h2>Publications and Conferences</h2>
-
-            <div class="publication-category">
-              <h3>First Author</h3>
-              <ol class="publication-list">
-                <li>
-                  (preparation)<strong>Jungwon An</strong>, “Sequential DVB Deposition and Plasma Functionalization for Surface Modification of PTFE Supports in Reinforced HQPC-TMA Membranes for Anion-Exchange Water Electrolysis”
-                  <br></L><em>Journal Name</em>, Year.</br>
-                </li>
-                <li>
-                  (preparation)<strong>Jungwon An</strong>, “) Highly Accessible FeNx Sites on Curved Surfaces Formed via In Situ Vapor-Mediated Treatment”
-                  <br><em>Journal Name</em>, Year.</br>
-                </li>
-              </ol>
+          <div id="publications" class="tab-content" role="tabpanel">
+            <div class="section-heading">
+              <h2>Publications &amp; Conferences</h2>
+              <p class="section-kicker">Selected Scholarly Work</p>
             </div>
 
-            <div class="publication-category">
-              <h3>Co-Author</h3>
+            <section class="publication-category">
+              <h3>First-Author Manuscripts</h3>
               <ol class="publication-list">
                 <li>
-                  Sohee Kim†, Hyunwoo Son†, <strong>Jungwon An</strong>, Segeun Jang* and Si-Hyung Lim*
-                  <br>“Butter-Infused Slippery Microholes Coupled with Photothermal Carbon for Efficient Anti-Icing and Deicing”
-                  <br><em>International Journal of Precision Engineering and Manufacturing-Green Technology</em>, 2026, <a href="https://doi.org/10.1007/s40684-026-00912-7">DOI: 10.1007/s40684-026-00912-7</a><br>
+                  <span class="pub-status">In preparation</span>
+                  <span class="pub-authors"><strong>Jungwon An</strong></span>
+                  <span class="pub-title">“Sequential DVB Deposition and Plasma Functionalization for Surface Modification of PTFE Supports in Reinforced HQPC-TMA Membranes for Anion-Exchange Water Electrolysis”</span>
+                  <span class="pub-journal">Manuscript in preparation.</span>
                 </li>
                 <li>
-                  Soyeong Jo†, Sohee Kim†, Jongmin Lee†, <strong>Jungwon An</strong>, Hyein Park, Jiwoo Lee, Je Hyeon Yeon* , Segeun Jang*, and Dong Young Chung*
-                  <br>“System-level impact of pore hierarchy and platinum spatial distribution on performance and durability”
-                  <br><em>Chemical Engineering Journal</em>, 2026, 544, 178886, <a href="https://doi.org/10.1016/j.cej.2026.178886">DOI: 10.1016/j.cej.2026.178886</a><br>
-                </li>
-                <li>
-                  Sungjun Kim†, Yeram Shin†, Minseop So, <strong>Jungwon An</strong>, Dong-Chan Kim, Jang Yong Lee*, Segeun Jang*
-                  <br>“Plasma-Engineered Polyethylene-Reinforced Anion Exchange Membranes with Low Ionic Resistance and Low Hydrogen Crossover for Water Electrolysis”
-                  <br><em>Advanced Science</em>, 2026, Accepted.<br>
-                </li>
-                 <li>
-                  Seung Yeop Yi†, Jiyoung An†, Jaemin Kim†, Sohee Kim†, Kyuri Cho, Daeeun Choi, Sol Han, Yeju Jang, Hyunwoo Jun, Jiwon Kim, 
-                   Seonhye Park ,<strong>Jungwon An</strong>, Seonggyu Lee, William E. Mustain, Wooyul Kim*, Seoin Back*, Segeun Jang*, Jinwoo Lee*
-                  <br>“Concerted Modulation of Single-Atom Electronic Structure and Interfacial Microenvironment for Oxygen Electroreduction”
-                  <br><em>Chemistry</em>, 2026, Accepted.<br>
+                  <span class="pub-status">In preparation</span>
+                  <span class="pub-authors"><strong>Jungwon An</strong></span>
+                  <span class="pub-title">“Highly Accessible FeN<sub>x</sub> Sites on Curved Surfaces Formed via In Situ Vapor-Mediated Treatment”</span>
+                  <span class="pub-journal">Manuscript in preparation.</span>
                 </li>
               </ol>
-            </div>
+            </section>
 
-            <div class="publication-category">
+            <section class="publication-category">
+              <h3>Co-Authored Publications</h3>
+              <ol class="publication-list">
+                <li>
+                  <span class="pub-authors">Sohee Kim†, Hyeonwoo Son†, <strong>Jungwon An</strong>, Segeun Jang*, and Si-Hyung Lim*</span>
+                  <span class="pub-title">“Butter-Infused Slippery Microholes Coupled with Photothermal Carbon for Efficient Anti-Icing and Deicing”</span>
+                  <span class="pub-journal"><em>International Journal of Precision Engineering and Manufacturing-Green Technology</em>, 2026. <a href="https://doi.org/10.1007/s40684-026-00912-7" target="_blank" rel="noopener noreferrer">DOI: 10.1007/s40684-026-00912-7</a></span>
+                </li>
+                <li>
+                  <span class="pub-authors">Soyeong Jo†, Sohee Kim†, Jongmin Lee†, <strong>Jungwon An</strong>, Hyein Park, Jiwoo Lee, Je Hyeon Yeon*, Segeun Jang*, and Dong Young Chung*</span>
+                  <span class="pub-title">“System-Level Impact of Pore Hierarchy and Platinum Spatial Distribution on Performance and Durability”</span>
+                  <span class="pub-journal"><em>Chemical Engineering Journal</em>, 2026, 544, 178886. <a href="https://doi.org/10.1016/j.cej.2026.178886" target="_blank" rel="noopener noreferrer">DOI: 10.1016/j.cej.2026.178886</a></span>
+                </li>
+                <li>
+                  <span class="pub-authors">Sungjun Kim†, Yeram Shin†, Minseop So, <strong>Jungwon An</strong>, Dong-Chan Kim, Jang Yong Lee*, and Segeun Jang*</span>
+                  <span class="pub-title">“Plasma-Engineered Polyethylene-Reinforced Anion Exchange Membranes with Low Ionic Resistance and Low Hydrogen Crossover for Water Electrolysis”</span>
+                  <span class="pub-journal"><em>Advanced Science</em>, 2026. Accepted.</span>
+                </li>
+                <li>
+                  <span class="pub-authors">Seung Yeop Yi†, Jiyoung An†, Jaemin Kim†, Sohee Kim†, Kyuri Cho, Daeeun Choi, Sol Han, Yeju Jang, Hyunwoo Jun, Jiwon Kim, Seonhye Park, <strong>Jungwon An</strong>, Seonggyu Lee, William E. Mustain, Wooyul Kim*, Seoin Back*, Segeun Jang*, and Jinwoo Lee*</span>
+                  <span class="pub-title">“Concerted Modulation of Single-Atom Electronic Structure and Interfacial Microenvironment for Oxygen Electroreduction”</span>
+                  <span class="pub-journal"><em>Chemistry</em>, 2026. Accepted.</span>
+                </li>
+              </ol>
+            </section>
+
+            <section class="publication-category">
               <h3>Conference Presentations</h3>
               <ol class="publication-list">
                 <li>
-                  <strong>Jungwon An†</strong>, Sohee Kim, Seongmin cho, Segeun Jang*
-                  <br>“Development of Electrode Durability Enhancement Technology for Polymer Electrolyte Membrane Fuel Cells Using a Low-Temperature Vapor Deposition Process”
-                  <br><em>Spring Conference of the Korean Hydrogen and New Energy Society (KHNES)</em>, 2025. Poster Presentation.
+                  <span class="pub-authors"><strong>Jungwon An†</strong>, Sohee Kim, Seongmin Cho, and Segeun Jang*</span>
+                  <span class="pub-title">“Development of Electrode Durability Enhancement Technology for Polymer Electrolyte Membrane Fuel Cells Using a Low-Temperature Vapor Deposition Process”</span>
+                  <span class="pub-journal"><em>Spring Conference of the Korean Hydrogen and New Energy Society (KHNES)</em>, 2025. Poster presentation.</span>
                 </li>
                 <li>
-                  <strong>Jungwon An†</strong>, Sohee Kim, Segeun Jang*
-                  <br>"Butter-Infused Slippery Microholes Coupled with Photothermal Carbon for Efficient Anti-Icing and Deicing"
-                  <br><em>Spring Conference of the Korean Society of Mechanical Engineers</em>, 2026. Poster Presentation.
+                  <span class="pub-authors"><strong>Jungwon An†</strong>, Sohee Kim, and Segeun Jang*</span>
+                  <span class="pub-title">“Butter-Infused Slippery Microholes Coupled with Photothermal Carbon for Efficient Anti-Icing and Deicing”</span>
+                  <span class="pub-journal"><em>Spring Conference of the Korean Society of Mechanical Engineers</em>, 2026. Poster presentation.</span>
                 </li>
                 <li>
-                  <strong>Jungwon An†</strong>, Segeun Jang* 
-                  <br> "Sequential DVB Deposition and Plasma Functionalization for Surface Modification of PTFE Supports in Reinforced HQPC-TMA Membranes for Anion-Exchange Water Electrolysis"
-                  <br><em>Materials Research Society(MRS)</em>, 2026. Poster Presentation.
+                  <span class="pub-authors"><strong>Jungwon An†</strong> and Segeun Jang*</span>
+                  <span class="pub-title">“Sequential DVB Deposition and Plasma Functionalization for Surface Modification of PTFE Supports in Reinforced HQPC-TMA Membranes for Anion-Exchange Water Electrolysis”</span>
+                  <span class="pub-journal"><em>Materials Research Society (MRS)</em>, 2026. Poster presentation.</span>
                 </li>
               </ol>
-            </div>
+            </section>
 
             <p class="pub-note">† Equal contribution; * Corresponding author.</p>
           </div>
 
-          <div id="projects" class="tab-content">
-            <h2>Selected Projects</h2>
+          <div id="projects" class="tab-content" role="tabpanel">
+            <div class="section-heading">
+              <h2>Projects</h2>
+              <p class="section-kicker">Research Experience</p>
+            </div>
 
-            <h3>Development of Hydrogen Electric Vehicle Fuel Cell Module Technology Using Pt-Alloy Nano-catalysts with MEA Pt Loading Below 0.2 g kW⁻¹ / Hyundai Mobis</h3>
-            <p>
-             •	Fabrication and Evaluation of PtCo/C Alloy Catalyst based MEA.
-            </p>
+            <section class="project-section">
+              <h3 class="project-section-title">Selected Projects</h3>
+              <div class="project-grid">
+                <article class="project-card">
+                  <h3>Development of Hydrogen Electric Vehicle Fuel Cell Module Technology Using Pt-Alloy Nanocatalysts with MEA Pt Loading Below 0.2 g kW<sup>−1</sup></h3>
+                  <span class="project-meta">Hyundai Mobis</span>
+                  <p class="project-role">Fabrication and evaluation of PtCo/C alloy catalyst-based MEAs.</p>
+                </article>
 
-            <h3>Development of Porous MPC Support-Based Catalysts Capable of Achieving over 90% Catalyst Loading / VNA-Tech</h3>
-            <p>
-             •	Development of N-Doped Carbon Shell and Si-Doped Functional Shell Formation Technologies via initiated Chemical Vapor Deposition
-            </p>
-            
-            <h3>Development of Core Technologies for Next-Generation High-Efficiency Anion Exchange Membrane Water Electrolysis / Ministry of Science and ICT </h3>
-            <p>
-             •	Development of Vapor-Phase Modification Technology for Porous Substrate and Fabrication of Reinforced Composite Membranes
-            </p>
+                <article class="project-card">
+                  <h3>Development of Porous MPC Support-Based Catalysts Capable of Achieving Over 90% Catalyst Loading</h3>
+                  <span class="project-meta">VNA-Tech</span>
+                  <p class="project-role">Development of N-doped carbon shells and Si-doped functional shells via initiated chemical vapor deposition.</p>
+                </article>
 
-             <h3>Fabrication of Zero-Energy Ice-Free Functional Skins via Photoinduced Interfacial Control / Ministry of Science and ICT </h3>
-            <p>
-             •	Design of Anti-Icing Surfaces Based on the Photothermal Effect
-            </p>
+                <article class="project-card">
+                  <h3>Development of Core Technologies for Next-Generation High-Efficiency Anion Exchange Membrane Water Electrolysis</h3>
+                  <span class="project-meta">Ministry of Science and ICT</span>
+                  <p class="project-role">Development of vapor-phase modification technology for porous substrates and fabrication of reinforced composite membranes.</p>
+                </article>
 
-            
-            <h2>Research Projects</h2>
+                <article class="project-card">
+                  <h3>Fabrication of Zero-Energy Ice-Free Functional Skins via Photoinduced Interfacial Control</h3>
+                  <span class="project-meta">Ministry of Science and ICT</span>
+                  <p class="project-role">Design of anti-icing surfaces based on the photothermal effect.</p>
+                </article>
+              </div>
+            </section>
 
-            <h3>Alpha-Project / Kookmin University (2025-Spring Semester) <br> Supervisor: Prof. Segeun Jang </br> </h3>
-            <p>
-             •	Development of Electrode Durability Enhancement Technology for Polymer Electrolyte Membrane Fuel Cells Using a Low-Temperature Vapor Deposition Process
-              <br>(1 conference presentation (KHNES ’26)</br>
-            </p>
-            
-            <h3>Alpha-Project / Kookmin University (2026-Fall Semester) <br> Supervisor: Prof. Segeun Jang </br> </h3>
-            <p>
-             •	Development of iCVD-Based Functional Layers for Improved Low-Humidity MEA Performance
-            </p>
-            
-            <h3>Undergraduate Research Opportunities Program / Kookmin University (Nov 2025 - Dec 2025) <br> Supervisor: Prof. Segeun Jang </br> </h3>
-            <p>
-             •	Porous Support Modification via iCVD for Durable Composite Electrolyte Membrane
-              <br>(Published 1 journal article and 1 conference presentation (Journal ’26, MRS ’26)</br>
-            </p>
+            <section class="project-section">
+              <h3 class="project-section-title">Student Research Projects</h3>
+              <div class="project-grid">
+                <article class="project-card">
+                  <h3>Alpha Project</h3>
+                  <span class="project-meta">Kookmin University · Spring 2025 · Supervisor: Prof. Segeun Jang</span>
+                  <p class="project-role">Development of electrode durability enhancement technology for polymer electrolyte membrane fuel cells using a low-temperature vapor deposition process.</p>
+                  <span class="project-note">Outcome: 1 conference presentation (KHNES ’26).</span>
+                </article>
 
-            <h3>Undergraduate Research Opportunities Program / Kookmin University (Jul 2026 - Aug 2026) <br> Supervisor: Prof. Segeun Jang </br> </h3>
-            <p>
-             •	Development and Performance Evaluation of iCVD-Based Direct Coating Technology for Improved MPC Catalyst Dispersion
-            </p>
-            
+                <article class="project-card">
+                  <h3>Alpha Project</h3>
+                  <span class="project-meta">Kookmin University · Fall 2026 · Supervisor: Prof. Segeun Jang</span>
+                  <p class="project-role">Development of iCVD-based functional layers for improved low-humidity MEA performance.</p>
+                </article>
+
+                <article class="project-card">
+                  <h3>Undergraduate Research Opportunities Program</h3>
+                  <span class="project-meta">Kookmin University · November–December 2025 · Supervisor: Prof. Segeun Jang</span>
+                  <p class="project-role">Porous support modification via iCVD for durable composite electrolyte membranes.</p>
+                  <span class="project-note">Outcome: 1 journal article and 1 conference presentation (Journal ’26; MRS ’26).</span>
+                </article>
+
+                <article class="project-card">
+                  <h3>Undergraduate Research Opportunities Program</h3>
+                  <span class="project-meta">Kookmin University · July–August 2026 · Supervisor: Prof. Segeun Jang</span>
+                  <p class="project-role">Development and performance evaluation of iCVD-based direct coating technology for improved MPC catalyst dispersion.</p>
+                </article>
+              </div>
+            </section>
           </div>
 
-          <div id="cv" class="tab-content">
-            <h2>CV</h2>
-            <p>
-              My full CV can be downloaded below.
-            </p>
-            <a class="cv-button" href="Curriculum%20Vitae_Jungwon%20An.docx" download>Download CV</a>
+          <div id="cv" class="tab-content" role="tabpanel">
+            <div class="section-heading">
+              <h2>Curriculum Vitae</h2>
+              <p class="section-kicker">Full Academic Record</p>
+            </div>
+
+            <div class="cv-panel">
+              <p>My full curriculum vitae can be downloaded below.</p>
+              <a class="cv-button" href="Curriculum%20Vitae_Jungwon%20An.docx" download>Download CV</a>
+            </div>
           </div>
         </section>
       </div>
     </section>
 
-    <p class="footer">Last updated: July 2026</p>
+    <p class="footer">Last updated: August 2026</p>
   </main>
 
   <script>
+    const mainContainer = document.getElementById('mainContainer');
+    const profileCard = document.getElementById('profileCard');
+    const contents = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-button');
+    const viewClasses = ['view-profile', 'view-research', 'view-publications', 'view-projects', 'view-cv'];
+
+    function clearActiveState() {
+      contents.forEach((content) => content.classList.remove('active'));
+      buttons.forEach((button) => {
+        button.classList.remove('active');
+        button.setAttribute('aria-selected', 'false');
+      });
+    }
+
     function openTab(event, tabName) {
-      const mainContainer = document.getElementById('mainContainer');
-      const profileCard = document.getElementById('profileCard');
-      const contents = document.querySelectorAll('.tab-content');
-      const buttons = document.querySelectorAll('.tab-button');
-
-      // Move the profile/menu area to the left.
       profileCard.classList.add('sidebar-mode');
+      mainContainer.classList.remove(...viewClasses);
+      mainContainer.classList.add(`view-${tabName}`);
 
-      // Adjust the page width depending on the selected tab.
-      mainContainer.classList.remove('profile-wide', 'publication-wide');
+      clearActiveState();
 
-      if (tabName === 'profile') {
-        mainContainer.classList.add('profile-wide');
-      } else if (tabName === 'publications') {
-        mainContainer.classList.add('publication-wide');
-      }
-
-      // Remove existing active states.
-      contents.forEach(content => content.classList.remove('active'));
-      buttons.forEach(button => button.classList.remove('active'));
-
-      // Show the selected tab content on the right.
-      document.getElementById(tabName).classList.add('active');
+      const selectedContent = document.getElementById(tabName);
+      selectedContent.classList.add('active');
       event.currentTarget.classList.add('active');
+      event.currentTarget.setAttribute('aria-selected', 'true');
+
+      if (window.innerWidth <= 780) {
+        selectedContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
 
     function goHome() {
-      const mainContainer = document.getElementById('mainContainer');
-      const profileCard = document.getElementById('profileCard');
-      const contents = document.querySelectorAll('.tab-content');
-      const buttons = document.querySelectorAll('.tab-button');
-
-      // Return to the centered home layout.
       profileCard.classList.remove('sidebar-mode');
-      mainContainer.classList.remove('profile-wide', 'publication-wide');
-
-      // Hide all tab contents and remove active button colors.
-      contents.forEach(content => content.classList.remove('active'));
-      buttons.forEach(button => button.classList.remove('active'));
+      mainContainer.classList.remove(...viewClasses);
+      clearActiveState();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 </body>
